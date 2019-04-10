@@ -15,8 +15,8 @@ class Buttons extends Component {
     { name: "3", color: "lightgray" },
     { name: "-", color: "lightblue" },
     { name: "0", color: "lightgray" },
-    { name: ".", color: "lightgray" },
     { name: "=", color: "orange" },
+    { name: "Borrar", color: "red" },
     { name: "+", color: "lightblue" }
   ];
 

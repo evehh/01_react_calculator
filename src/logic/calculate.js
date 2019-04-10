@@ -1,6 +1,10 @@
 const operators = ["÷", "×", "+", "-", "="];
 export default function calculate(actualState, button) {
   let newState;
+  console.log(actualState.value);
+  if (button == "Borrar") {
+    newState = { value: 0, operation: "" };
+  }
   if (actualState.value === 0 && button === "=") {
     //Presiona botón '=' sin ingresar operador y el valor es '0'
     console.log(
@@ -18,7 +22,7 @@ export default function calculate(actualState, button) {
         "' al estado actual..."
     );
     newState = { value: actualState.value + button, operation: "" };
-  } else if (actualState.value === 0 && !isNaN(button)) {
+  } else if (actualState.value === 0 && !isNaN(button) && button !== "0") {
     //Presiona un número cuando el valor es '0'
     console.log(
       "Se presionó el botón '" +
@@ -53,6 +57,22 @@ export default function calculate(actualState, button) {
       value: actualState.value.replace(/.$/, button),
       operation: ""
     };
+  } else if (isLastCharacterOperator(actualState.value) && button === "=") {
+    //Se presiona el botón '=' cuando el ultimo caracter del valor es tambien un operador
+    console.log(
+      "Se presionó el botón '" +
+        button +
+        "' y el último caracter es un operador. Manteniendo el estado actual..."
+    );
+    newState = actualState;
+    return newState;
+  } else if (actualState.value === 0 && button === "0") {
+    //Presiona botón '0' cuando el valor es '0'
+    console.log(
+      "Se presionó el botón '0' sin ingresar algun numero antes y el valor actual es '0'. Manteniedo el estado actual..."
+    );
+    newState = actualState;
+    return newState;
   } else if (operators.includes(button) && button !== "=") {
     //Se presiona un operador y es distinto a '='
     console.log(
